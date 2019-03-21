@@ -113,6 +113,3 @@ if __name__ == "__main__":
             a = executor.submit(creator)
     except:
         pass
-×
-Drag and Drop
-The image will be downloaded by Fatkun
