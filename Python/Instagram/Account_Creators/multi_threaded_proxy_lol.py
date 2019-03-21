@@ -103,7 +103,9 @@ def creator():
 if __name__ == "__main__":
 
     q = queue.Queue()
-
+    
+    # 4 works is just under 15,000 requests per hour
+    # 9 works is just under 25,000 requests per hour
     executor = ThreadPoolExecutor(max_workers=4)
 
     try:
