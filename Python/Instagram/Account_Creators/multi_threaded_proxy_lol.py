@@ -26,7 +26,6 @@ def creator():
     first_name = first()
 
     url = "https://www.instagram.com/accounts/web_create_ajax/"
-    #url = "https://2a03:2880:f201:e5:face:b00c:0:4420"
 
     headers = {
         'accept': "*/*",
@@ -36,7 +35,7 @@ def creator():
         'content-type': 'application/x-www-form-urlencoded',
         'origin': "https://www.instagram.com",
         'referer': "https://www.instagram.com/",
-        #'user-agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36",
+        'user-agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36",
         'x-csrftoken': "0TKjZA9W7DDrqBjQaShyrYbULZSfujDb",
         'x-instagram-ajax': "c7e210fa2eb7",
         'x-requested-with': "XMLHttpRequest",
@@ -44,11 +43,10 @@ def creator():
         'Cache-Control': "no-cache",
     }
     payload = {
-        'email': email, #'annfranklen@live.com',
-        #'email': "avcodtimt@mailnesia.com",
-        'password': password, #'Wonderhowsecurethisis',
-        'username': username, #'annfranklen',
-        'first_name': first_name, #'ann franklen',
+        'email': email,
+        'password': password,
+        'username': username,
+        'first_name': first_name,
         'client_id': 'W6mHTAAEAAHsVu2N0wGEChTQpTfn',
         'seamless_login_enabled': '1',
         'gdpr_s': '%5B0%2C2%2C0%2Cnull%5D',
@@ -56,10 +54,10 @@ def creator():
         'opt_into_one_tap': 'false'
     }
 
-    proxy_url = "http://api.proxies.lol/?apiKey=262d20a91d1a4707ace94f2b6e674508&country=us&post=true"
-
-    the_proxy_data = requests.get(proxy_url).json()['proxy']
-
+    # PROVIDE YOUR OWN PROXY IP / PORT HERE
+    # PROXY FORMAT: ip:port 
+    # Example: 123.123.213.211:8080
+    
     proxy = {"http":"https://" + the_proxy_data, "https":"https://" + the_proxy_data}
 
     try:
