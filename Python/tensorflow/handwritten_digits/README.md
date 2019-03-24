@@ -7,7 +7,8 @@
 
 
 ## Accuracy:
-- How accurate is digit classification with this model? 99.8%
+- How accurate is digit classification with this model? 
+-- A CNN was used to obtain 99.8% accuracy on the mnist dataset
 
 ## Purpose:
 - Learn about tensorflow
