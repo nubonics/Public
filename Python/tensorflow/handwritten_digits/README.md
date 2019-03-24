@@ -5,6 +5,10 @@
 
 # Handwritten Digits
 
+
+## Accuracy:
+- How accurate is digit classification with this model? 99.8%
+
 ## Purpose:
 - Learn about tensorflow
 - Be able to run a model on a local image file
@@ -17,6 +21,3 @@
 ## Possible Future Updates:
 - Run classification on multiple image digits
 - Run classification on image url
-
-## Accuracy:
-- How accurate is digit classification with this model? 99.8%
