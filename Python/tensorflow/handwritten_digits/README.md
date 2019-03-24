@@ -17,3 +17,6 @@
 ## Possible Future Updates:
 - Run classification on multiple image digits
 - Run classification on image url
+
+## Accuracy:
+- How accurate is digit classification with this model? 99.8%
