@@ -4,7 +4,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
 		host = 'localhost',
 		user = 'root',
-		passwd = 'Shombala1001!',
+		passwd = 'password',
 		database = 'testdb',
 		table = 'users', # the name of the table, this is needed ONLY if the table has already been created.
 
