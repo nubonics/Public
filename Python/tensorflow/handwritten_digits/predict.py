@@ -4,7 +4,7 @@ __credits__ = ["Nubonics"]
 __license__ = "GPL"
 __version__ = "0.0.0"
 __maintainer__ = "Nubonics"
-__email__ = "codyjquist@hotmail.com"
+__email__ = "codyjquist@gmail.com"
 __status__ = "Development"
 
 
