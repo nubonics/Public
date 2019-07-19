@@ -1,0 +1,127 @@
+import jsonlines
+from time import sleep
+from telethon.sync import TelegramClient
+
+
+def load_credentials():
+    with jsonlines.open(r'C:\Users\Nubonix\pyscripts3\trading\nadex\Assets\telegram_api_credentials.json', 'r') as reader:
+        for obj in reader:
+            return obj['api_id'], obj['api_hash']
+
+
+LC = load_credentials()
+api_id = LC[0]
+api_hash = LC[1]
+
+channel_name = "AutoTrade"
+account_name = 'autotradingaccount'
+
+
+with TelegramClient(account_name, api_id, api_hash) as client:
+
+
+    dialogs = client.iter_dialogs()
+
+    def write_lastest_message_id():
+        """ This is similar to reading an unread message through email, however this is for telegram instead. """
+        for dialog in dialogs:
+            if dialog.name == channel_name:
+                with open('lastest_message_id.txt','w') as writer:
+                    # print(dialog.message.id)
+                    writer.write(str(dialog.message.id))
+    
+    
+    def get_latest_message_id():
+        with open('lastest_message_id.txt','r') as reader:
+            message_id = int(reader.readline())
+            return message_id
+
+    def buy(asset, epic, price, strike):
+        print('bought')
+        #pass
+    
+    def sell(asset, epic, price, strike):
+        print('sold')
+        #pass
+
+    def close_buy(asset, epic, price, strike):
+        print('closing buy')
+        #pass
+
+    def close_sell(asset, epic, price, strike):
+        print('closing sell')
+        #pass
+
+    def obtain_epic():
+        pass
+
+    def get_latest_message():
+
+        message_filter = ['WORKING ORDER FOR ',
+                    'SELL',
+                    'BUY',
+                    'FILLED',
+                    'TP TARGET HIT ON THE',
+                    'ALERT COMING',
+        ]
+
+        while True:
+            # SLEEP IS REQUIRED!!!
+            # Otherwise a single request could take up to a minute! INSTEAD of a 5 second delay!!!!!
+            # We would rather have a 5 second delay on ALL messages received VS up to a minute delay!!!!!
+            sleep(5)
+            try:
+                for dialog in dialogs:
+                    if dialog.name == channel_name:
+                        latest_message_id = dialog.message.id
+                        previous_message_id = get_latest_message_id()
+
+                        if latest_message_id > get_latest_message_id():
+                            # Update the latest_message_id so that we dont act upon the same message multiple times
+                            write_lastest_message_id()
+                            
+                            # DO SOMETHING WITH THE MESSAGE NOW
+                            msg = str(dialog.message.message).upper()
+
+
+                            # FILTRATION
+                            if message_filter[2] in msg and message_filter[4] not in msg or message_filter[1] in msg and message_filter[4] not in msg:
+                                ASSET = msg.split('(')[0]
+                                TIMEFRAME = msg.split('(')[1].split(')')[0]
+                                STRIKE = msg.split(')(')[2].split(')')[0]
+                                # 
+                                EPIC = None
+                                print(msg)
+
+                                if msg.split(')(')[1] == "BUY":
+                                    DIRECTION = "+"
+
+                                if msg.split(')(')[1] == "SELL":
+                                    DIRECTION = "-"
+
+                            if message_filter[0] in msg:
+                                PRICE = msg.split(message_filter[0])[1].split(' OR BETTER')[0].replace('$','')
+                                if "+" in DIRECTION:
+                                    buy(asset=ASSET, epic=EPIC, price=PRICE, strike=STRIKE)
+
+                                if "-" in DIRECTION:
+                                    sell(asset=ASSET, epic=EPIC, price=PRICE, strike=STRIKE)
+
+                            if message_filter[4] in msg:
+                                if "+" in DIRECTION:
+                                    close_buy(asset=ASSET, epic=EPIC, price=PRICE, strike=STRIKE)
+
+                                if "-" in DIRECTION:
+                                    close_sell(asset=ASSET, epic=EPIC, price=PRICE, strike=STRIKE)
+          
+            except KeyboardInterrupt:
+                break
+
+    def main():
+        # write_latest_message_id() is required in order for get_latest_message() to work properly...
+        # DO NOT DELETE the next line which is write_latest_message_id()
+        write_lastest_message_id()
+        get_latest_message()
+
+    if __name__ == "__main__":
+        main()
