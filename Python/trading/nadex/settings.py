@@ -1,1 +1,0 @@
-asset_directory = r"C:\Users\Nubonix\pyscripts3\trading\nadex\Assets"
